@@ -3,16 +3,16 @@ import random
 def up(x):
     for i in range(0,4):
         for j in range(0,4):
-            if i != 3:
-                x[i][j]= x[i][j]+x[i+1][j]
-                x[i+1][j]=0
+            if i != 3:   
+                    x[i][j]= x[i][j]+x[i+1][j]
+                    x[i+1][j]=0
             else :
                 x[i][j]=0
     return x
 def down(x):
-    for i in range(-1, -4, -1):
-        for j in range(-1, -4, -1):
-            if i != 0:
+    for i in range(-1, -5, -1):
+        for j in range(-1, -5, -1):
+            if i != -4:
                 x[i][j] = x[i][j] + x[i-1][j]
                 x[i-1][j] = 0
 
@@ -29,12 +29,11 @@ def left(x):
                 x[i][j]=0
     return x
 def right(x):
-    for i in range(-1, -4, -1):
-        for j in range(-1, -4, -1):
-            if j != 0:
+    for i in range(-1, -5, -1):
+        for j in range(-1, -5, -1):
+            if j != -4:
                 x[i][j] = x[i][j] + x[i][j-1]
                 x[i][j-1] = 0
-
             else:
                 x[i][j]=0
     return x
@@ -54,29 +53,51 @@ def int_maker(x):
     x[i][j]=y
     return x
 def gameloop():
-    pass
-table = table_maker()
-table = int_maker(table)
-table = int_maker(table)
-table = int_maker(table)
-table = int_maker(table)
+    table = table_maker()
+    table = int_maker(table)
+    table = int_maker(table)
+    table = int_maker(table)
+    table = int_maker(table)
 
-print(table)
-while True:
-    move = input("Enter yor move by (W/S/A/D) or Q for quit").lower()
-    if move == "w":
-        table = up(table)
-        print(table)
-    elif move == "s":
-        table = down(table)
-        print(table)
-    elif move == "a":
-        table = left(table)
-        print(table)
-    elif move == "d":
-        table = right(table)
-        print(table)
-    elif move == "q" :
-        break
-    else :
-        print("not valid")
+    print(table)
+    for row in table:
+        for element in row:
+            print(element, end="  ") 
+        print()  
+    while True:
+        move = input("Enter yor move by (W/S/A/D) or Q for quit").lower()
+        if move == "w":
+            table = up(table)
+            for row in table:
+                for element in row:
+                    print(element, end="  ") 
+                print()
+            table = int_maker(table)  
+        elif move == "s":
+            table = down(table)
+            for row in table:
+                for element in row:
+                    print(element, end="  ") 
+                print()  
+            table = int_maker(table)
+        elif move == "a":
+            table = left(table)
+            for row in table:
+                for element in row:
+                    print(element, end="  ") 
+                print()  
+            table = int_maker(table)
+        elif move == "d":
+            table = right(table)
+            for row in table:
+                for element in row:
+                    print(element, end="  ") 
+                print()  
+            table = int_maker(table)
+        elif move == "q" :
+            break
+        else :
+            print("not valid")
+
+if __name__ == "__main__":
+    gameloop()
